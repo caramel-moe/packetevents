@@ -118,7 +118,7 @@ public class ParticleTypes {
 
     //with minecraft:key
     public static ParticleType<?> getByName(String name) {
-        return PARTICLE_TYPE_MAP.get(name);
+        return PARTICLE_TYPE_MAP.get(ResourceLocation.normString(name));
     }
 
     public static ParticleType<?> getById(ClientVersion version, int id) {
