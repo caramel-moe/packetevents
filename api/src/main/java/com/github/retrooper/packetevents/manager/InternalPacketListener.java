@@ -90,8 +90,13 @@ public class InternalPacketListener extends PacketListenerAbstract {
             // Store world data
             NBTCompound registryDataTag = registryData.getRegistryData();
             if (registryDataTag != null) {
-                NBTList<NBTCompound> list = registryDataTag
-                        .getCompoundTagOrNull("minecraft:dimension_type")
+                NBTCompound dimension = registryDataTag
+                        .getCompoundTagOrNull("minecraft:dimension_type");
+                if (dimension == null) {
+                    dimension = registryDataTag
+                        .getCompoundTagOrNull("dimension_type");
+                }
+                NBTList<NBTCompound> list = dimension
                         .getCompoundListTagOrNull("value");
                 user.setWorldNBT(list);
             }
@@ -109,8 +114,13 @@ public class InternalPacketListener extends PacketListenerAbstract {
             // Store world data
             NBTCompound dimensionCodec = joinGame.getDimensionCodec();
             if (dimensionCodec != null) {
-                NBTList<NBTCompound> list = dimensionCodec
-                        .getCompoundTagOrNull("minecraft:dimension_type")
+                NBTCompound dimension = dimensionCodec
+                        .getCompoundTagOrNull("minecraft:dimension_type");
+                if (dimension == null) {
+                    dimension = dimensionCodec
+                        .getCompoundTagOrNull("dimension_type");
+                }
+                NBTList<NBTCompound> list = dimension
                         .getCompoundListTagOrNull("value");
                 user.setWorldNBT(list);
             }

@@ -283,4 +283,17 @@ public class User {
         }
         return null;
     }
+
+    @Nullable
+    public NBTCompound getWorldNBT(final com.github.retrooper.packetevents.resources.ResourceLocation worldName) {
+        if (worldNBT == null) {
+            return null;
+        }
+        for (NBTCompound compound : worldNBT) {
+            if (new com.github.retrooper.packetevents.resources.ResourceLocation(compound.getStringTagOrNull("name").getValue()).equals(worldName)) {
+                return compound;
+            }
+        }
+        return null;
+    }
 }
