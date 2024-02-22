@@ -135,14 +135,14 @@ publishing {
 
     repositories {
         maven {
-            val snapshotUrl = "https://repo.codemc.io/repository/maven-snapshots/"
-            val releaseUrl = "https://repo.codemc.io/repository/maven-releases/"
+            val snapshotUrl = "https://repo.caramel.moe/repository/maven-snapshots/"
+            val releaseUrl = "https://repo.caramel.moe/repository/maven-releases/"
 
             // Check which URL should be used
             url = uri(if ((version as String).endsWith("SNAPSHOT")) snapshotUrl else releaseUrl)
 
-            val mavenUsername = System.getenv("retrooper_username") ?: return@maven
-            val mavenPassword = System.getenv("retrooper_password") ?: return@maven
+            val mavenUsername = System.getenv("DEPLOY_ID") ?: return@maven
+            val mavenPassword = System.getenv("DEPLOY_PW") ?: return@maven
 
             credentials {
                 username = mavenUsername
