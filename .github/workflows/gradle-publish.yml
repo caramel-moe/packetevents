@@ -1,6 +1,8 @@
 name: Gradle Package
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches: [ '2.0' ]
 
 jobs:
   build:
@@ -27,44 +29,50 @@ jobs:
       - name: Build with Gradle
         run: chmod +x gradlew && ./gradlew build
 
-      - name: Upload build artifacts api
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-build
-          path: api/build/libs
+      #- name: Upload build artifacts api
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: api-build
+      #    path: api/build/libs
 
-      - name: Upload build artifacts spigot
-        uses: actions/upload-artifact@v4
-        with:
-          name: spigot-build
-          path: spigot/build/libs
+      #- name: Upload build artifacts spigot
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: spigot-build
+      #    path: spigot/build/libs
 
-      - name: Upload build artifacts netty-common
-        uses: actions/upload-artifact@v4
-        with:
-          name: netty-common-build
-          path: netty-common/build/libs
+      #- name: Upload build artifacts netty-common
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: netty-common-build
+      #    path: netty-common/build/libs
 
-      - name: Upload build artifacts bungeecord
-        uses: actions/upload-artifact@v4
-        with:
-          name: bungeecord-build
-          path: bungeecord/build/libs
+      #- name: Upload build artifacts bungeecord
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: bungeecord-build
+      #    path: bungeecord/build/libs
 
-      - name: Upload build artifacts velocity
-        uses: actions/upload-artifact@v4
-        with:
-          name: velocity-build
-          path: velocity/build/libs
+      #- name: Upload build artifacts velocity
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: velocity-build
+      #    path: velocity/build/libs
 
-      - name: Upload build artifacts fabric
-        uses: actions/upload-artifact@v4
-        with:
-          name: fabric-build
-          path: fabric/build/libs
+      #- name: Upload build artifacts fabric
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: fabric-build
+      #    path: fabric/build/libs
 
-      - name: Upload build artifacts sponge
-        uses: actions/upload-artifact@v4
-        with:
-          name: sponge-build
-          path: sponge/build/libs
+      #- name: Upload build artifacts sponge
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: sponge-build
+      #    path: sponge/build/libs
+
+      - name: Publish package
+        run: ./gradlew publishAllPublicationsToMavenRepository
+        env:
+          DEPLOY_ID: ${{ secrets.DEPLOY_ID }}
+          DEPLOY_PW: ${{ secrets.DEPLOY_PW }}
