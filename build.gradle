@@ -81,14 +81,14 @@ subprojects {
 
         repositories {
             maven {
-                def snapshotUrl = "https://repo.codemc.io/repository/maven-snapshots/"
-                def releaseUrl = "https://repo.codemc.io/repository/maven-releases/"
+                def snapshotUrl = "https://repo.caramel.moe/repository/maven-snapshots/"
+                def releaseUrl = "https://repo.caramel.moe/repository/maven-releases/"
 
                 // Check which URL should be used
                 url = project.version.endsWith("SNAPSHOT") ? snapshotUrl : releaseUrl
 
-                def mavenUsername = System.getenv("retrooper_username") ? System.getenv("retrooper_username") : null
-                def mavenPassword = System.getenv("retrooper_password") ? System.getenv("retrooper_password") : null
+                def mavenUsername = System.getenv("DEPLOY_ID") ? System.getenv("DEPLOY_ID") : null
+                def mavenPassword = System.getenv("DEPLOY_PW") ? System.getenv("DEPLOY_PW") : null
 
                 if(mavenUsername != null && mavenPassword != null) {
                     credentials {

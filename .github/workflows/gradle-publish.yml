@@ -1,6 +1,8 @@
 name: Gradle Package
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches: [ 'release/2.2.1' ]
 
 jobs:
   build:
@@ -53,3 +55,11 @@ jobs:
         with:
           name: velocity-build
           path: velocity/build/libs
+
+      - name: Publish package
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishAllPublicationsToMavenRepository
+        env:
+          DEPLOY_ID: ${{ secrets.DEPLOY_ID }}
+          DEPLOY_PW: ${{ secrets.DEPLOY_PW }}
